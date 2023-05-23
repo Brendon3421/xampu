@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programinha q sai som</title>
+</head>
+<body>
+    selecionar Voz: <select id='voicelist'></select><br><br>
+    <input id = 'txtInput' /><br<><br>
+    <button id ='bntspeak'>Falar!</button>
+
+<Script>
+    var txtInput = document.querySelector('#txtInput');
+    var voicelist =document.querySelector('#voicelist');
+    var bntspeak = document.querySelector('#bntspeak');
+    var synth = window.speechSynthesis;
+    var voices= []
+    
+    newvoices() 
+    if(SpeechSynthesis !== undefined){
+        speechSynthesis.onvoiceschanged = newvoices
+    }
+
+
+
+    bntspeak.addEventListener('click', ()=>{
+        var tospeak = new SpeechSynthesisUtterance(txtInput.value)
+        var selectVoicename = voicelist.selectOptions[0].getattibute('data-name')
+        voices.forEach((voice)=>{
+            if(voice.name === selectVoicename){
+                tospeak.voice = voice
+            }
+        })
+    })
+    
+    
+    
+    function newvoices () {
+        voices = synth.getVoices()
+        var selectIndex = voicelist.selectIndex < 0 ? 0 : voicelist.selectIndex
+        voicelist.innerHTML = ''
+        voices.forEach((voice) => {
+            var listItem = document.createElement('OPTION')
+            listItem.textContent = voice.name
+            listItem.setAttribute('data-lang',voice.lang)
+            listItem.setAttribute('data-name',voice.name)
+            voicelist.appendChild(listItem)
+        })
+        voicelist.selectIndex =  selectIndex 
+
+
+
+    }
+
+</Script>
+
+</body>
+
+</html>
+
+
+

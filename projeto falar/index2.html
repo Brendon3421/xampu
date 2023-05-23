@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Texto para Fala</title>
+  </head>
+  <body>
+    <h1>Texto para Fala</h1>
+    <p>Digite o texto que deseja transformar em audio:</p>
+    <textarea id="texto"></textarea>
+    <br>
+    <button id="botao">Transformar em audio</button>
+    <script>
+      
+      if ('speechSynthesis' in window) {
+        var synth = window.speechSynthesis;
+          
+        var botao = document.getElementById('botao');
+      
+        botao.addEventListener('click', function() {
+       
+          var texto = document.getElementById('texto').value;
+          
+    
+          var fala = new SpeechSynthesisUtterance(texto);
+          
+          // Inicia a síntese de fala
+          synth.speak(fala);
+        });
+      } else {
+        // A API Web Speech não está disponível
+        alert('Desculpe, a síntese de fala não está disponível no seu navegador.');
+      }
+
+      count($nomes)
+    </script>
+  </body>
+</html>
